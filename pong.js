@@ -5,15 +5,15 @@
 Pong = {
 
   Defaults: {
-    width:        640,   // logical canvas width (browser will scale to physical canvas size - which is controlled by @media css queries)
-    height:       480,   // logical canvas height (ditto)
+    width:        1920,   // logical canvas width (browser will scale to physical canvas size - which is controlled by @media css queries)
+    height:       1080,   // logical canvas height (ditto)
     wallWidth:    12,
-    paddleWidth:  12,
-    paddleHeight: 60,
+    paddleWidth:  20,
+    paddleHeight: 300,
     paddleSpeed:  2,     // should be able to cross court vertically   in 2 seconds
-    ballSpeed:    4,     // should be able to cross court horizontally in 4 seconds, at starting speed ...
-    ballAccel:    8,     // ... but accelerate as time passes
-    ballRadius:   5,
+    ballSpeed:    30,     // should be able to cross court horizontally in 4 seconds, at starting speed ...
+    ballAccel:    0,     // ... but accelerate as time passes
+    ballRadius:   15,
     sound:        true
   },
 
@@ -150,23 +150,23 @@ Pong = {
 
   onkeydown: function(keyCode) {
     switch(keyCode) {
-      case Game.KEY.ZERO: this.startDemo();            break;
-      case Game.KEY.ONE:  this.startSinglePlayer();    break;
-      case Game.KEY.TWO:  this.startDoublePlayer();    break;
-      case Game.KEY.ESC:  this.stop(true);             break;
-      case Game.KEY.Q:    if (!this.leftPaddle.auto)  this.leftPaddle.moveUp();    break;
-      case Game.KEY.A:    if (!this.leftPaddle.auto)  this.leftPaddle.moveDown();  break;
-      case Game.KEY.P:    if (!this.rightPaddle.auto) this.rightPaddle.moveUp();   break;
-      case Game.KEY.L:    if (!this.rightPaddle.auto) this.rightPaddle.moveDown(); break;
+      // case Game.KEY.ZERO: this.startDemo();            break;
+      // case Game.KEY.ONE:  this.startSinglePlayer();    break;
+      case Game.KEY.S:  this.startDoublePlayer();    break;
+      case Game.KEY.E:  this.stop(false);             break;
+      case Game.KEY.FOUR:    if (!this.leftPaddle.auto)  this.leftPaddle.moveUp();    break;
+      case Game.KEY.ONE:    if (!this.leftPaddle.auto)  this.leftPaddle.moveDown();  break;
+      case Game.KEY.SIX:    if (!this.rightPaddle.auto) this.rightPaddle.moveUp();   break;
+      case Game.KEY.THREE:    if (!this.rightPaddle.auto) this.rightPaddle.moveDown(); break;
     }
   },
 
   onkeyup: function(keyCode) {
     switch(keyCode) {
-      case Game.KEY.Q: if (!this.leftPaddle.auto)  this.leftPaddle.stopMovingUp();    break;
-      case Game.KEY.A: if (!this.leftPaddle.auto)  this.leftPaddle.stopMovingDown();  break;
-      case Game.KEY.P: if (!this.rightPaddle.auto) this.rightPaddle.stopMovingUp();   break;
-      case Game.KEY.L: if (!this.rightPaddle.auto) this.rightPaddle.stopMovingDown(); break;
+      case Game.KEY.FOUR: if (!this.leftPaddle.auto)  this.leftPaddle.stopMovingUp();    break;
+      case Game.KEY.ONE: if (!this.leftPaddle.auto)  this.leftPaddle.stopMovingDown();  break;
+      case Game.KEY.SIX: if (!this.rightPaddle.auto) this.rightPaddle.stopMovingUp();   break;
+      case Game.KEY.THREE: if (!this.rightPaddle.auto) this.rightPaddle.stopMovingDown(); break;
     }
   },
 
@@ -196,8 +196,8 @@ Pong = {
     },
 
     draw: function(ctx) {
-      ctx.drawImage(this.press1.image, this.press1.x, this.press1.y);
-      ctx.drawImage(this.press2.image, this.press2.x, this.press2.y);
+      // ctx.drawImage(this.press1.image, this.press1.x, this.press1.y);
+      // ctx.drawImage(this.press2.image, this.press2.x, this.press2.y);
       if (this.winner == 0)
         ctx.drawImage(this.winner1.image, this.winner1.x, this.winner1.y);
       else if (this.winner == 1)

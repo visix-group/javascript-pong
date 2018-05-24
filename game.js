@@ -179,10 +179,16 @@ Game = {
     ZERO:     48,
     ONE:      49,
     TWO:      50,
+    THREE:    51,
+    FOUR:     52,
+    FIVE:     53,
+    SIX:      54,
     A:        65,
+    E:        69,
     L:        76,
     P:        80,
     Q:        81,
+    S:        83,
     TILDA:    192
   },
 
