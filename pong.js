@@ -11,7 +11,7 @@ Pong = {
     paddleWidth:  20,
     paddleHeight: 300,
     paddleSpeed:  2,     // should be able to cross court vertically   in 2 seconds
-    ballSpeed:    20,     // should be able to cross court horizontally in 4 seconds, at starting speed ...
+    ballSpeed:    10,     // should be able to cross court horizontally in 4 seconds, at starting speed ...
     ballAccel:    0,     // ... but accelerate as time passes
     ballRadius:   15,
     sound:        true
@@ -76,6 +76,18 @@ Pong = {
   startDemo:         function() { this.start(0); },
   startSinglePlayer: function() { this.start(1); },
   startDoublePlayer: function() { this.start(2); },
+  showWinner: function() {
+    let winner = -1;
+    if(this.scores[0] > this.scores[1]) {
+      winner = 0
+    } else if(this.scores[1] > this.scores[0]) {
+      winner = 1;
+    }
+    if(winner !== -1) {
+      this.menu.declareWinner(winner);
+      this.stop(false);
+    }
+  },
 
   start: function(numPlayers) {
     if (!this.playing) {
@@ -94,27 +106,26 @@ Pong = {
         this.playing = false;
         this.leftPaddle.setAuto(false);
         this.rightPaddle.setAuto(false);
-        this.runner.showCursor();
       }
     }
   },
 
+  reset: function() {
+    this.stop();
+    this.scores = [0, 0];
+  },
+
   level: function(playerNo) {
-    return 8 + (this.scores[playerNo] - this.scores[playerNo ? 0 : 1]);
+    // return 8 + (this.scores[playerNo] - this.scores[playerNo ? 0 : 1]);
+    return 8;
   },
 
   goal: function(playerNo) {
     this.sounds.goal();
     this.scores[playerNo] += 1;
-    if (this.scores[playerNo] == 9) {
-      this.menu.declareWinner(playerNo);
-      this.stop();
-    }
-    else {
-      this.ball.reset(playerNo);
-      this.leftPaddle.setLevel(this.level(0));
-      this.rightPaddle.setLevel(this.level(1));
-    }
+    this.ball.reset(playerNo);
+    this.leftPaddle.setLevel(this.level(0));
+    this.rightPaddle.setLevel(this.level(1));
   },
 
   update: function(dt) {
@@ -142,18 +153,21 @@ Pong = {
     this.court.draw(ctx, this.scores[0], this.scores[1]);
     this.leftPaddle.draw(ctx);
     this.rightPaddle.draw(ctx);
-    if (this.playing)
+    if (this.playing) {
       this.ball.draw(ctx);
-    else
+    } else {
       this.menu.draw(ctx);
+    }
   },
 
   onkeydown: function(keyCode) {
     switch(keyCode) {
       // case Game.KEY.ZERO: this.startDemo();            break;
       // case Game.KEY.ONE:  this.startSinglePlayer();    break;
+      case Game.KEY.R:  this.reset();    break;
       case Game.KEY.S:  this.startDoublePlayer();    break;
       case Game.KEY.E:  this.stop(false);             break;
+      case Game.KEY.W:  this.showWinner();             break;
       case Game.KEY.FOUR:    if (!this.leftPaddle.auto)  this.leftPaddle.moveUp();    break;
       case Game.KEY.ONE:    if (!this.leftPaddle.auto)  this.leftPaddle.moveDown();  break;
       case Game.KEY.SIX:    if (!this.rightPaddle.auto) this.rightPaddle.moveUp();   break;
