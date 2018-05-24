@@ -1,0 +1,22 @@
+{
+  "name": "pong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "asar": "^0.14.3",
+    "electron": "^2.0.2",
+    "electron-packager": "^12.1.0"
+  },
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=release-builds --asar=true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/visix-group/pong.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

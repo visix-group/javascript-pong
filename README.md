@@ -1,6 +1,23 @@
 Canvas Pong
 ===========
 
+## Electron
+
+### Run
+
+```
+npm start
+```
+
+
+### Build for windows
+
+```
+npx electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=release-builds --asar=true
+```
+
+## General
+
 This is a small experiment to implement a version of the classic Pong game in an HTML <canvas>.
 
  * You can find the [game here](http://codeincomplete.com/posts/2011/5/14/javascript_pong/demo.html)
